@@ -5,7 +5,7 @@ const cors = require('cors')
 class Server {
     constructor() {
         this.app = express()
-        this.port = process.env.PORT
+        this.port = process.env.PORT || 8080
         //paths
         this.repositoriesPath = '/api/repositories'
         this.usersPath = '/api/users'        
