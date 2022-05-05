@@ -16,7 +16,7 @@ router.post(
   [
     check("nombre", "name is required").not().isEmpty(),
     check("email", "email is required").normalizeEmail().isEmail(),
-    check("fecha_nacimiento", "value must be an ISO8601 format")
+    check("fecha_nacimiento", "value is required and must be an ISO8601 format")
       .isISO8601()
       .toDate(),
     check("password", "password must have 6 letters at least").isLength({

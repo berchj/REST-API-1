@@ -8,6 +8,7 @@ const getRecord = async (req = request, res = response) => {
       let q = `SELECT 
                 usuarios.nombre,
                 usuarios.email,
+                historial_de_login.id_historial_de_login,
                 historial_de_login.fecha_hora,
                 historial_de_login.tipo 
                FROM historial_de_login INNER JOIN usuarios WHERE historial_de_login.id_historial_de_login = usuarios.id_usuarios AND id_historial_de_login = ${connection.escape(
@@ -35,6 +36,7 @@ const getRecords = async (req = request, res = response) => {
       if (error) throw error;
       let q = `SELECT usuarios.nombre,
                 usuarios.email,
+                historial_de_login.id_historial_de_login,
                 historial_de_login.fecha_hora,
                 historial_de_login.tipo 
                FROM historial_de_login INNER JOIN usuarios WHERE historial_de_login.usuarios_id_usuario = usuarios.id_usuarios`;

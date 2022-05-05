@@ -114,7 +114,7 @@ const getRepository = async (req = request, res = response) => {
   try {
     await pool.getConnection((error, connection) => {
       if (error) throw error;
-      let q = `SELECT usuarios.nombre,usuarios.email,repositorios.nombre_proyecto,repositorios.lenguaje,repositorios.descripcion FROM repositorios INNER JOIN usuarios WHERE repositorios.usuarios_id_usuarios = usuarios.id_usuarios AND repositorios.id_repositorio = ${connection.escape(
+      let q = `SELECT usuarios.nombre,usuarios.email,repositorios.nombre_proyecto,repositorios.lenguaje,repositorios.descripcion FROM repositorios INNER JOIN usuarios WHERE repositorios.usuarios_id_usuario = usuarios.id_usuarios AND repositorios.id_repositorio = ${connection.escape(
         req.params.id
       )}`;
       connection.query(q,(error,rows,fields)=>{
