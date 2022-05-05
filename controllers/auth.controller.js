@@ -26,6 +26,7 @@ const login = async (req = request, res = response) => {
             return res.status(400).json({ message: "Invalid credentials" });
           }
           const user = rows[0];
+          console.log(user)
           //generate jwt
           const token = await generateJWT(rows[0].id_usuario);          
           //get date
