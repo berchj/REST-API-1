@@ -117,9 +117,9 @@ const postRecord = async (req = request, res = response) => {
         ${connection.escape(new Date())},
         ${connection.escape(tipo)},
         ${connection.escape(usuarios_id_usuario)})`;
-      connection.query(q, (error, result) => {
+      connection.query(q, (error, rows,fields) => {
         if (error) throw error;
-        if (!result) {
+        if (!rows.length) {
           return res.status(200).json({ error: "error creating resource" });
         }
         return res
