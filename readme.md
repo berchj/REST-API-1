@@ -5,11 +5,24 @@ PASOS PARA CORRER EL PROYECTO LOCALMENTE:
     4 - EJECUTAR  npm start  PARA CORRER EL PROYECTO
     5 - IR A localhost:8080
 
-DOCUMENTACION DE LA REST API 
+DOCUMENTACION DE LA REST API (RECOMIENDO TESTEARLA CON POSTMAN) 
     HEROKU : https://project-cambalache.herokuapp.com
     SE RECOMIENDA:
         1 - EMPEZAR CON EL ENDPOINT DE CREAR USUARIO NUEVO (LINEA 45 DE ESTE DOCUMENTO)
+
         2 - USAR EL ENDPOINT DE AUTH LOGIN QUE DEVUELVE EL JSONWEBTOKEN (LINEA 17 DE ESTE DOCUMENTO)
+
+        3 - COPIAR EL TOKEN Y PEGARLO EN UN HEADER LLAMADO x-token 
+
+        CREDENCIALES PARA CONECTARSE A LA BASE DE DATOS:
+            host:'us-cdbr-east-05.cleardb.net'
+            user:'b1ab3693220e6b'
+            password:'dbad1e4f'
+            database:'heroku_40673a1facac44b'
+
+
+
+
     ENDPOINTS :     
         '/api/auth'
             METODOS:
@@ -19,10 +32,10 @@ DOCUMENTACION DE LA REST API
                         "email":"example@mail.com",
                         "password:"123456"
                     } 
-        '/api/repositories/'
+        '/api/repositories'
             METODOS:
                 EJEMPLO PETICION POST: 
-                    RUTA '/api/repositories/' (TOKEN REQUERIDO)
+                    RUTA '/api/repositories' (TOKEN REQUERIDO)
                     {
                         "nombre_proyecto":"POO",
                         "lenguaje":"PHP",
@@ -38,11 +51,11 @@ DOCUMENTACION DE LA REST API
                 EJEMPLO PETICION DELETE:
                     RUTA '/api/repositories/:id' (TOKEN REQUERIDO)
                 EJEMPLOS GET: 
-                    RUTA /api/repositories/  (TODOS) (TOKEN REQUERIDO)
+                    RUTA /api/repositories  (TODOS) (TOKEN REQUERIDO)
                          /api/repositories/:id  (UNO) (TOKEN REQUERIDO)
         '/api/users'  
              EJEMPLO PETICION POST: 
-                    RUTA '/api/users/' 
+                    RUTA '/api/users' 
                     {
                         "nombre":"usuario",
                         "email":"usuario@mail.com",
@@ -60,14 +73,14 @@ DOCUMENTACION DE LA REST API
                 EJEMPLO PETICION DELETE:
                     RUTA '/api/users/:id' (TOKEN REQUERIDO)
                 EJEMPLOS GET: 
-                    RUTA /api/users/  (TODOS) (TOKEN REQUERIDO)
+                    RUTA /api/users  (TODOS) (TOKEN REQUERIDO)
                          /api/users/:id  (UNO) (TOKEN REQUERIDO)              
-        '/api/records/'
+        '/api/records'
             EJEMPLO PETICION POST: 
-                    RUTA '/api/records/'  (TOKEN REQUERIDO)
+                    RUTA '/api/records'  (TOKEN REQUERIDO)
                     {
                         "tipo":"admin",    
-                        "usuarios_id_usuario":"4"
+                        "usuarios_id_usuario":"24" (id referencial al usuario que se logeo)
                     }
                 EJEMPLO PETICION PUT:
                     RUTA '/api/records/:id' (TOKEN REQUERIDO)
@@ -77,5 +90,5 @@ DOCUMENTACION DE LA REST API
                 EJEMPLO PETICION DELETE:
                     RUTA '/api/records/:id' (TOKEN REQUERIDO)
                 EJEMPLOS GET: 
-                    RUTA /api/records/  (TODOS) (TOKEN REQUERIDO)
+                    RUTA /api/records  (TODOS) (TOKEN REQUERIDO)
                          /api/records/:id  (UNO) (TOKEN REQUERIDO)
