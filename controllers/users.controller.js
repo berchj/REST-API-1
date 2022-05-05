@@ -11,10 +11,10 @@ const getUser = async (req = request, res = response) => {
       )} AND status = 1`;
       connection.query(q, (error, rows, fields) => {
         if (error) throw error;
-        if(!rows.length) {
-          return res.status(404).json({error:"not found"})
+        if (!rows.length) {
+          return res.status(404).json({ error: "not found" });
         }
-        return res.status(200).json({data:rows[0]})
+        return res.status(200).json({ data: rows[0] });
       });
       connection.release();
     });
@@ -80,7 +80,9 @@ const postUser = async (req = request, res = response) => {
                 ${connection.escape(fecha_nacimiento)},
                 ${connection.escape(lenguaje_programacion_favorito)},
                 ${connection.escape(encrypted_pass)}
-          ); SELECT nombre,email,fecha_nacimiento,lenguaje_programacion_favorito FROM usuarios WHERE email = ${connection.escape(email)}`;
+          ); SELECT nombre,email,fecha_nacimiento,lenguaje_programacion_favorito FROM usuarios WHERE email = ${connection.escape(
+            email
+          )}`;
           connection.query(queryInsert, (err, rows, fields) => {
             if (err) throw err;
             return res
@@ -166,15 +168,14 @@ const deleteUser = async (req = request, res = response) => {
       let q = `UPDATE usuarios SET status = 0 WHERE id_usuarios = ${connection.escape(
         req.params.id
       )} AND status = 1`;
-      connection.query(q, (error, result) => {
+      connection.query(q, (error, rows, fields) => {
         if (error) throw error;
-        if (result) {
-          return res
-            .status(200)
-            .json({ message: "resource deleted successfully" });
-        } else {
+        if (!rows.length) {
           return res.status(404).json({ message: "resource not found" });
         }
+        return res
+          .status(200)
+          .json({ message: "resource deleted successfully" });
       });
       connection.release();
     });
