@@ -88,9 +88,9 @@ const putRecord = async (req = request, res = response) => {
       let q = `UPDATE historial_de_login SET tipo = ? WHERE id_historial_de_login = ${connection.escape(
         req.params.id
       )}`;
-      connection.query(q, [tipo], (error, result) => {
+      connection.query(q, [tipo], (error, rows,fields) => {
         if (error) throw error;
-        if (!result) {
+        if (!rows.length) {
           return res.status(404).json({ error: "resource not found" });
         }
         return res
