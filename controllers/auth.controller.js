@@ -28,13 +28,13 @@ const login = async (req = request, res = response) => {
           const user = rows[0];
           console.log(user)
           //generate jwt
-          const token = await generateJWT(rows[0].id_usuario);          
+          const token = await generateJWT(rows[0].id_usuarios);          
           //get date
           const date = new Date() 
           //generate login record for table         
           let queryRecord = `INSERT INTO historial_de_login (fecha_hora,usuarios_id_usuario) VALUES (
             ${connection.escape(date)},
-            ${connection.escape(user.id_usuario)}
+            ${connection.escape(user.id_usuarios)}
           )`
           connection.query(queryRecord,(error,result)=>{
             if(error) throw error

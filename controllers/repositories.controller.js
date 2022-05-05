@@ -24,7 +24,7 @@ const postRepository = async (req = request, res = response) => {
             ${connection.escape(lenguaje)},
             ${connection.escape(new Date())},
             ${connection.escape(descripcion)},
-            ${connection.escape(req.user.id_usuario)}
+            ${connection.escape(req.user.id_usuarios)}
         ); SELECT nombre_proyecto, lenguaje, fecha_creacion, descripcion FROM repositorios WHERE  nombre_proyecto = ${connection.escape(
           nombre_proyecto
         )}`;
@@ -94,7 +94,7 @@ const getRepositories = async (req = request, res = response) => {
   try {
     await pool.getConnection((error, connection) => {
       if (error) throw error;
-      let q = `SELECT usuarios.nombre,usuarios.email,repositorios.nombre_proyecto,repositorios.lenguaje,repositorios.descripcion FROM repositorios INNER JOIN usuarios WHERE repositorios.usuarios_id_usuario = usuarios.id_usuario`;
+      let q = `SELECT usuarios.nombre,usuarios.email,repositorios.nombre_proyecto,repositorios.lenguaje,repositorios.descripcion FROM repositorios INNER JOIN usuarios WHERE repositorios.usuarios_id_usuario = usuarios.id_usuarios`;
       connection.query(q, (error, rows, fields) => {
         if (error) throw error;
         if (!rows.length) {
@@ -114,7 +114,7 @@ const getRepository = async (req = request, res = response) => {
   try {
     await pool.getConnection((error, connection) => {
       if (error) throw error;
-      let q = `SELECT usuarios.nombre,usuarios.email,repositorios.nombre_proyecto,repositorios.lenguaje,repositorios.descripcion FROM repositorios INNER JOIN usuarios WHERE repositorios.usuarios_id_usuario = usuarios.id_usuario AND repositorios.id_repositorio = ${connection.escape(
+      let q = `SELECT usuarios.nombre,usuarios.email,repositorios.nombre_proyecto,repositorios.lenguaje,repositorios.descripcion FROM repositorios INNER JOIN usuarios WHERE repositorios.usuarios_id_usuarios = usuarios.id_usuarios AND repositorios.id_repositorio = ${connection.escape(
         req.params.id
       )}`;
       connection.query(q,(error,rows,fields)=>{

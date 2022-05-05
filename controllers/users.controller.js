@@ -6,7 +6,7 @@ const getUser = async (req = request, res = response) => {
   try {
     await pool.getConnection((error, connection) => {
       if (error) throw error;
-      let q = `SELECT nombre,email,fecha_nacimiento,lenguaje_programacion_favorito FROM usuarios WHERE id_usuario = ${connection.escape(
+      let q = `SELECT nombre,email,fecha_nacimiento,lenguaje_programacion_favorito FROM usuarios WHERE id_usuarios = ${connection.escape(
         req.params.id
       )} AND status = 1`;
       connection.query(q, (error, rows, fields) => {
@@ -124,7 +124,7 @@ const putUser = async (req = request, res = response) => {
           return res.status(400).json({ error: "email alredy in use" });
         } else {
           //if email is available
-          let queryUpdate = `UPDATE usuarios SET nombre = ?, email = ?,fecha_nacimiento = ?,lenguaje_programacion_favorito = ? , password = ? WHERE id_usuario = ${connection.escape(
+          let queryUpdate = `UPDATE usuarios SET nombre = ?, email = ?,fecha_nacimiento = ?,lenguaje_programacion_favorito = ? , password = ? WHERE id_usuarios = ${connection.escape(
             req.params.id
           )} AND status = 1`;
           connection.query(
@@ -163,7 +163,7 @@ const deleteUser = async (req = request, res = response) => {
   try {
     await pool.getConnection((error, connection) => {
       if (error) throw error;
-      let q = `UPDATE usuarios SET status = 0 WHERE id_usuario = ${connection.escape(
+      let q = `UPDATE usuarios SET status = 0 WHERE id_usuarios = ${connection.escape(
         req.params.id
       )} AND status = 1`;
       connection.query(q, (error, result) => {

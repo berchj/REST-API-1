@@ -10,7 +10,7 @@ const getRecord = async (req = request, res = response) => {
                 usuarios.email,
                 historial_de_login.fecha_hora,
                 historial_de_login.tipo 
-               FROM historial_de_login INNER JOIN usuarios WHERE historial_de_login.id_historial_de_login = usuarios.id_usuario AND id_historial_de_login = ${connection.escape(
+               FROM historial_de_login INNER JOIN usuarios WHERE historial_de_login.id_historial_de_login = usuarios.id_usuarios AND id_historial_de_login = ${connection.escape(
         req.params.id
       )}`;
       connection.query(q, (error, rows, fields) => {
@@ -37,7 +37,7 @@ const getRecords = async (req = request, res = response) => {
                 usuarios.email,
                 historial_de_login.fecha_hora,
                 historial_de_login.tipo 
-               FROM historial_de_login INNER JOIN usuarios WHERE historial_de_login.usuarios_id_usuario = usuarios.id_usuario`;
+               FROM historial_de_login INNER JOIN usuarios WHERE historial_de_login.usuarios_id_usuario = usuarios.id_usuarios`;
       connection.query(q, (err, rows, fields) => {
         if (!rows.length) {
           return res.status(404).json({ message: "resources not found" });

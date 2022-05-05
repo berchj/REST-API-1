@@ -11,7 +11,7 @@ const verifyToken = async (req = request, res = response, next) => {
     const { id } = jwt.verify(token, process.env.SECRET);
     //read user
     await pool.getConnection((error, connection) => {
-      let q = `SELECT * FROM usuarios WHERE id_usuario = ${id} AND status = 1`;
+      let q = `SELECT * FROM usuarios WHERE id_usuarios = ${id} AND status = 1`;
       connection.query(q, (error, rows, fields) => {
         if (error) throw error;
         const user = rows[0];
