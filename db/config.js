@@ -6,6 +6,7 @@ const pool = mysql.createPool({
     database:'heroku_40673a1facac44b',
     connectionLimit:10,
     connectTimeout:10,
-    multipleStatements:true
+    multipleStatements:true,
+    enableKeepAlive:true
 })
 module.exports = pool
