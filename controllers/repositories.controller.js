@@ -8,8 +8,11 @@ const deleteRepository = async(req = request, res = responsen) =>{
         let q = `DELETE FROM repositorios WHERE id_repositorio = ${connection.escape(
           req.params.id
         )}`
-        connection.query(q,(error,result)=>{
+        connection.query(q,(error,rows,fields)=>{
           if(error) throw error
+          if(!rows.length){
+            return res.status(404),json({error:"not found"})
+          }
           return res.status(200).json({message:"resource successfully deleted"})
         })
         connection.release()
