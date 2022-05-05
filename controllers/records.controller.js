@@ -65,7 +65,7 @@ const deleteRecord = async (req = request, res = response) => {
       connection.query(q, (error, rows, fields) => {
         if (error) throw error;
         if(!rows.length){
-          return res.status(404),json({error:"not found"})
+          return res.status(404).json({error:"not found"})
         }
         return res.status(200).json({ message: "record deleted successfully" });
       });
