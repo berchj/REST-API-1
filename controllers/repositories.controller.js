@@ -1,7 +1,25 @@
 const { response, request } = require("express");
 const pool = require("../db/config");
 const { validationResult } = require("express-validator");
-
+const deleteRepository = async(req = request, res = responsen) =>{
+    try {
+      await pool.getConnection((error,connection)=>{
+        if(error) throw error
+        let q = `DELETE FROM repositorios WHERE id_repositorio = ${connection.escape(
+          req.params.id
+        )}`
+        connection.query(q,(error,result)=>{
+          if(error) throw error
+          return res.status(200).json({message:"resource successfully deleted"})
+        })
+        connection.release()
+      })
+    } catch (error) {
+      return res.status(500).json({
+        error: "Internal server error . Please contact an administrator",
+      });
+    }
+}
 const postRepository = async (req = request, res = response) => {
   const { nombre_proyecto, lenguaje, descripcion } = req.body;
   const errors = validationResult(req);
@@ -137,4 +155,5 @@ module.exports = {
   putRepository,
   getRepositories,
   getRepository,
+  deleteRepository
 };

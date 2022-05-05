@@ -4,7 +4,8 @@ const {
   postRepository,
   putRepository,
   getRepositories,
-  getRepository
+  getRepository,
+  deleteRepository
 } = require("../controllers/repositories.controller");
 const { verifyToken } = require("../middlewares/middlewares");
 const router = Router();
@@ -41,4 +42,5 @@ router.put(
   ],
   putRepository
 );
+router.delete('/:id',verifyToken,deleteRepository)
 module.exports = router;
